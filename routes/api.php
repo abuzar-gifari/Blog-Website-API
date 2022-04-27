@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminAuth;
 use App\Http\Controllers\Admin\CategoryController;
 // use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\PostController;
@@ -9,11 +10,17 @@ use App\Http\Controllers\Frontend\GetPostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->group(function(){
+    // return $request->user();
+    Route::get('admins',[AdminAuth::class,'admins']);
+    Route::post('logout',[AdminAuth::class,'logout']);
 });
 
 Route::prefix('/admin')->group(function(){
+
+    // login route
+    Route::post('login',[AdminAuth::class,'login']);
+
     //categorys route
     Route::get('/categorys',[CategoryController::class,'index']);
     Route::post('/categorys',[CategoryController::class,'store']);
