@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoryController;
+// use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\GetPostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -32,9 +34,11 @@ Route::prefix('/admin')->group(function(){
     Route::get('/settings',[SettingController::class,'index']);
     Route::post('/settings/{id}',[SettingController::class,'update']);
     
+    // contact route
+    Route::get('/contact',[\App\Http\Controllers\Admin\ContactController::class,'getContacts']);
+    
 
 });    
-
 
 Route::prefix('/front')->group(function(){
     Route::get('/all-posts',[GetPostController::class,'index']);
@@ -42,4 +46,5 @@ Route::prefix('/front')->group(function(){
     Route::get('/single-posts/{id}',[GetPostController::class,'getPostById']);
     Route::get('/category-posts/{id}',[GetPostController::class,'getPostByCategory']);
     Route::get('/searchposts/{search}',[GetPostController::class,'searchPost']);
+    Route::post('/contact',[ContactController::class,'store']);
 });
