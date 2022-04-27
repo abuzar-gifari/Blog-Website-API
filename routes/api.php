@@ -37,6 +37,9 @@ Route::prefix('/admin')->group(function(){
     // contact route
     Route::get('/contact',[\App\Http\Controllers\Admin\ContactController::class,'getContacts']);
     
+    // subscriber routes
+    Route::get('/subscribe',[\App\Http\Controllers\Admin\SubscribeController::class,'getSubs']);
+    
 
 });    
 
@@ -47,4 +50,5 @@ Route::prefix('/front')->group(function(){
     Route::get('/category-posts/{id}',[GetPostController::class,'getPostByCategory']);
     Route::get('/searchposts/{search}',[GetPostController::class,'searchPost']);
     Route::post('/contact',[ContactController::class,'store']);
+    Route::post('/subscribe',[\App\Http\Controllers\Frontend\SubscribeController::class,'store']);
 });
