@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\SettingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,5 +26,10 @@ Route::prefix('/admin')->group(function(){
     Route::post('/posts/{id}',[PostController::class,'update']);
     Route::delete('/posts/{id}',[CategoryController::class,'delete']);
     Route::get('/posts/{search}',[CategoryController::class,'search']);
+
+    // setting route
+    Route::get('/settings',[SettingController::class,'index']);
+    Route::post('/settings/{id}',[SettingController::class,'update']);
+    
 
 });    
