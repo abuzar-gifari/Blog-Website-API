@@ -151,4 +151,20 @@ class CategoryController extends Controller
         }
     }
 
+    public function getTotalCategory(){
+        try {
+            $total_cat=Category::count();
+            // dd($total_comments);
+            return response()->json([
+                'success'=>true,
+                'comments'=>"Total Category number : ".$total_cat
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'success'=>false,
+                'contacts'=>$e->getMessage(),
+            ]);
+        }
+    }
+
 }

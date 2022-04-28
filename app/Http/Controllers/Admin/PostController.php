@@ -183,4 +183,22 @@ class PostController extends Controller
         }
     }
 
+    public function getTotalPosts(){
+        try {
+            $total_posts=Post::count();
+            // dd($total_comments);
+            return response()->json([
+                'success'=>true,
+                'comments'=>"Total Posts number : ".$total_posts
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'success'=>false,
+                'contacts'=>$e->getMessage(),
+            ]);
+        }
+    }
+
+    
+
 }

@@ -28,6 +28,7 @@ Route::prefix('/admin')->group(function(){
     Route::post('/categorys/{id}',[CategoryController::class,'update']);
     Route::delete('/categorys/{id}',[CategoryController::class,'delete']);
     Route::get('/categorys/{search}',[CategoryController::class,'search']);
+    Route::get('/total-categorys',[CategoryController::class,'getTotalCategory']);
 
     //posts route
     Route::get('/posts',[PostController::class,'index']);
@@ -36,6 +37,7 @@ Route::prefix('/admin')->group(function(){
     Route::post('/posts/{id}',[PostController::class,'update']);
     Route::delete('/posts/{id}',[CategoryController::class,'delete']);
     Route::get('/posts/{search}',[CategoryController::class,'search']);
+    Route::get('/total-posts',[CategoryController::class,'getTotalPosts']);
 
     // setting route
     Route::get('/settings',[SettingController::class,'index']);
@@ -46,6 +48,11 @@ Route::prefix('/admin')->group(function(){
     
     // subscriber routes
     Route::get('/subscribe',[\App\Http\Controllers\Admin\SubscribeController::class,'getSubs']);
+    Route::get('/total-subscribers',[CategoryController::class,'getTotalSubscribers']);
+
+    // comments routes
+    Route::get('/comments',[\App\Http\Controllers\Admin\CommentController::class,'getComments']);
+    Route::get('/total-comments',[\App\Http\Controllers\Admin\CommentController::class,'getTotalComments']);
     
 
 });    
@@ -58,4 +65,6 @@ Route::prefix('/front')->group(function(){
     Route::get('/searchposts/{search}',[GetPostController::class,'searchPost']);
     Route::post('/contact',[ContactController::class,'store']);
     Route::post('/subscribe',[\App\Http\Controllers\Frontend\SubscribeController::class,'store']);
+    Route::post('/comments/{id}',[\App\Http\Controllers\Frontend\CommentController::class,'comment']);
+    Route::get('/comments',[\App\Http\Controllers\Frontend\CommentController::class,'getComments']);
 });

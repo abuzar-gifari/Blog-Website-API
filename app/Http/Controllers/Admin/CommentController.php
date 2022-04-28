@@ -3,35 +3,35 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Subscribe;
-use Exception;
+use App\Models\Comment;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use Exception;
 
-class SubscribeController extends Controller
+class CommentController extends Controller
 {
-    public function getSubs(){
+    public function getComments(){
         try {
-            $subscribers=Subscribe::get();
+            $commnets=Comment::orderBy('id','desc')->get();
             return response()->json([
                 'success'=>true,
-                'subscriber'=>$subscribers,
+                'comments'=>$commnets
             ]);
         } catch (Exception $e) {
             return response()->json([
                 'success'=>false,
-                'exception'=>"some problem occur"
+                'contacts'=>$e->getMessage(),
             ]);
         }
     }
 
-    public function getTotalSubscribers(){
+
+    public function getTotalComments(){
         try {
-            $total_subscribers=Subscribe::count();
+            $total_comments=Comment::count();
             // dd($total_comments);
             return response()->json([
                 'success'=>true,
-                'comments'=>"Total Comments number : ".$total_subscribers
+                'comments'=>"Total Comments number : ".$total_comments
             ]);
         } catch (Exception $e) {
             return response()->json([
